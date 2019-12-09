@@ -16,16 +16,16 @@ namespace AdventOfCode2019
         public string Day_01_Part2()
         {
             var result = 0;
-            var stuff = GetInput().Split('\n').Select(x => (int.Parse(x)));
-            foreach (var s in stuff)
+            var fuel = GetInput().Split('\n').Select(x => (int.Parse(x)));
+            foreach (var f in fuel)
             {
-                result += Hat(s);
+                result += CalculateFuel(f);
             }
 
             return Result(result);
         }
 
-        private int Hat(int i)
+        private int CalculateFuel(int i)
         {
             var result = 0;
             while (i > 0)
