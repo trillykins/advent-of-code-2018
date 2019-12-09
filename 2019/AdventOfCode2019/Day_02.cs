@@ -11,8 +11,28 @@ namespace AdventOfCode2019
         public string Day_02_Part1()
         {
             var opcodes = GetInput().Split(',').Select(x => int.Parse(x)).ToArray();
-            opcodes[1] = 12;
-            opcodes[2] = 2;
+
+            return Result(RunInstructions(opcodes, 12, 2));
+        }
+
+        public string Day_02_Part2()
+        {
+            var opcodes = GetInput().Split(',').Select(x => int.Parse(x)).ToArray();
+
+            for (int noun = 0; noun <= 99; noun++)
+            {
+                for (int verb = 0; verb <= 99; verb++)
+                {
+                    if (RunInstructions(opcodes.ToArray(), noun, verb) == 19690720) return Result(100 * noun + verb);
+                }
+            }
+            throw new Exception(nameof(Day_02_Part2));
+        }
+
+        private int RunInstructions(int[] opcodes, int noun, int verb)
+        {
+            opcodes[1] = noun;
+            opcodes[2] = verb;
             for (int i = 0; i < opcodes.Length; i++)
             {
                 if (i % 4 != 0) continue;
@@ -28,8 +48,7 @@ namespace AdventOfCode2019
                     _ => throw new Exception("Invalid opcode!"),
                 };
             }
-
-            return Result(opcodes[0]);
+            return opcodes[0];
         }
     }
 }
