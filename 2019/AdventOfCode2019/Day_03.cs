@@ -8,7 +8,6 @@ namespace AdventOfCode2019
 {
     public class Day_03 : Shared
     {
-
         public string Day_03_Part1()
         {
             throw new NotImplementedException();
