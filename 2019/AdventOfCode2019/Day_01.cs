@@ -10,13 +10,13 @@ namespace AdventOfCode2019
     {
         public string Day_01_Part1()
         {
-            return Result(GetInput().Split('\n').Select(x => (int.Parse(x) / 3) - 2).Sum());
+            return Result(GetAllInput().Split('\n').Select(x => (int.Parse(x) / 3) - 2).Sum());
         }
 
         public string Day_01_Part2()
         {
             var result = 0;
-            var fuel = GetInput().Split('\n').Select(x => (int.Parse(x)));
+            var fuel = GetAllInput().Split('\n').Select(x => (int.Parse(x)));
             foreach (var f in fuel)
             {
                 result += CalculateFuel(f);

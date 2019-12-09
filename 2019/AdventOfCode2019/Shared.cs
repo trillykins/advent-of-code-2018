@@ -14,7 +14,7 @@ namespace AdventOfCode2019
             return $"{callerName}: {result}";
         }
 
-        protected string GetInput([CallerMemberName] string callerName = "")
+        protected string GetAllInput([CallerMemberName] string callerName = "")
         {
             var number = callerName.Substring(callerName.IndexOf('_') + 1, 2);
             if (!int.TryParse(number, out var day)) throw new Exception();

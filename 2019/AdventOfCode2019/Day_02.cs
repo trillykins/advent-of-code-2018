@@ -10,14 +10,14 @@ namespace AdventOfCode2019
     {
         public string Day_02_Part1()
         {
-            var opcodes = GetInput().Split(',').Select(x => int.Parse(x)).ToArray();
+            var opcodes = GetAllInput().Split(',').Select(x => int.Parse(x)).ToArray();
 
             return Result(RunInstructions(opcodes, 12, 2));
         }
 
         public string Day_02_Part2()
         {
-            var opcodes = GetInput().Split(',').Select(x => int.Parse(x)).ToArray();
+            var opcodes = GetAllInput().Split(',').Select(x => int.Parse(x)).ToArray();
 
             for (int noun = 0; noun <= 99; noun++)
             {
