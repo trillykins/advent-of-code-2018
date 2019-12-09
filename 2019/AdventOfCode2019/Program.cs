@@ -7,12 +7,14 @@ namespace AdventOfCode2019
     {
         static void Main()
         {
-            var list = new List<(string day, int answer)> {
-                (nameof(Day_01), new Day_01().Answer()),
+            var list = new List<string> {
+                new Day_01().Day_01_Part1(),
+                new Day_01().Day_01_Part2(),
+                new Day_02().Day_02_Part1(),
             };
-            foreach (var (day, answer) in list)
+            foreach (var answer in list)
             {
-                Console.WriteLine($"{day}: {answer}");
+                Console.WriteLine(answer);
             }
         }
     }
