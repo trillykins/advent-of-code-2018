@@ -13,6 +13,7 @@ namespace AdventOfCode2019
                 new Day_02().Day_02_Part1(),
                 new Day_02().Day_02_Part2(),
                 new Day_03().Day_03_Part1(),
+                new Day_03().Day_03_Part2(),
             };
             foreach (var answer in list)
             {
