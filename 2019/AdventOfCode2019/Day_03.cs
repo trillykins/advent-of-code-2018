@@ -34,8 +34,11 @@ namespace AdventOfCode2019
                 second.AddRange(TranslateWireCompletePath(s, second.Last()));
             }
 
-            var diffs = first.Intersect(second).Distinct().Where(p => p != Point.Empty).ToArray();
-            var result = diffs.Select(p => Math.Abs(p.X) + Math.Abs(p.Y)).OrderBy(x => x).ToArray();
+            File.WriteAllText("wire1.txt", string.Join("\n", first));
+            File.WriteAllText("wire2.txt", string.Join("\n", second));
+
+            var diffs = first.Intersect(second).Where(p => p != Point.Empty).ToArray();
+            var result = diffs.Select(p => Math.Abs(p.X) + Math.Abs(p.Y)).ToArray();
             return Result(result.Min());
         }
 
