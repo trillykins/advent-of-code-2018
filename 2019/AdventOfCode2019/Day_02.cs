@@ -8,25 +8,33 @@ namespace AdventOfCode2019
 {
     public class Day_02 : Shared
     {
-        public string Day_02_Part1()
+        public Day_02()
+        {
+            Console.WriteLine(Day_02_Part1());
+            Console.WriteLine(Day_02_Part2());
+        }
+
+        private string Day_02_Part1()
         {
             var opcodes = GetAllInput().Split(',').Select(x => int.Parse(x)).ToArray();
 
             return Result(RunInstructions(opcodes, 12, 2));
         }
 
-        public string Day_02_Part2()
+        private string Day_02_Part2()
         {
             var opcodes = GetAllInput().Split(',').Select(x => int.Parse(x)).ToArray();
 
-            for (int noun = 0; noun <= 99; noun++)
+            var finished = false;
+            var result = 0;
+            for (int noun = 0; noun <= 99 && !finished; noun++)
             {
-                for (int verb = 0; verb <= 99; verb++)
+                for (int verb = 0; verb <= 99 && !finished; verb++)
                 {
-                    if (RunInstructions(opcodes.ToArray(), noun, verb) == 19690720) return Result(100 * noun + verb);
+                    if (RunInstructions(opcodes.ToArray(), noun, verb) == 19690720) return Result(result = 100 * noun + verb);
                 }
             }
-            throw new Exception(nameof(Day_02_Part2));
+            throw new Exception();
         }
 
         private int RunInstructions(int[] opcodes, int noun, int verb)

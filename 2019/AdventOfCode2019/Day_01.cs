@@ -8,12 +8,18 @@ namespace AdventOfCode2019
 {
     public class Day_01 : Shared
     {
-        public string Day_01_Part1()
+        public Day_01()
+        {
+            Console.WriteLine(Day_01_Part1());
+            Console.WriteLine(Day_01_Part2());
+        }
+
+        private string Day_01_Part1()
         {
             return Result(GetAllInput().Split('\n').Select(x => (int.Parse(x) / 3) - 2).Sum());
         }
 
-        public string Day_01_Part2()
+        private string  Day_01_Part2()
         {
             var result = 0;
             var fuel = GetAllInput().Split('\n').Select(x => (int.Parse(x)));

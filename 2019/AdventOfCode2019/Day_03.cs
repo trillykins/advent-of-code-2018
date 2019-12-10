@@ -9,7 +9,13 @@ namespace AdventOfCode2019
 {
     public class Day_03 : Shared
     {
-        public string Day_03_Part1()
+        public Day_03()
+        {
+            Console.WriteLine(Day_03_Part1());
+            Console.WriteLine(Day_03_Part2());
+        }
+
+        private string Day_03_Part1()
         {
             var input = GetAllInput().Split('\n');
             var firstInput = input[0].Split(',');
@@ -33,7 +39,7 @@ namespace AdventOfCode2019
             return Result(result.Min());
         }
 
-        public string Day_03_Part2()
+        private string Day_03_Part2()
         {
             var input = GetAllInput().Split('\n');
             var firstInput = input[0].Split(',');
