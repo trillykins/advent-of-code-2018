@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="puzzle_input\04.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="puzzle_text\" />
   </ItemGroup>
 
