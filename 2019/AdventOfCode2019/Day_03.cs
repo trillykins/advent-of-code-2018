@@ -20,28 +20,46 @@ namespace AdventOfCode2019
 
             for (int i = 0; i < firstInput.Length; i++)
             {
-                first.Add(TranslateWirePath(firstInput[i], first.Last()));
-                second.Add(TranslateWirePath(secondInput[i], second.Last()));
+                first.AddRange(TranslateWireCompletePath(firstInput[i], first.Last()));
+                second.AddRange(TranslateWireCompletePath(secondInput[i], second.Last()));
             }
 
             var crossedWires = new List<(int x, int y)>(first.Count());
             int splat = 0;
-            foreach(var f in first)
+
+            foreach (var (x1, y1) in first)
             {
-                foreach(var (x, y) in second)
+                foreach (var (x2, y2) in second)
                 {
-                    if (f.x == x && f.y == y) crossedWires.Add(f);
+                    if (x1 == x2 && y1 == y2) crossedWires.Add((x1, y1));
                     splat++;
                 }
             }
-
-            return Result(crossedWires.Min(w => Math.Abs(w.x + w.y)));
+            var result = crossedWires.Where(x => x.x != 0 && x.y != 0).Min(w => Math.Abs(w.x + w.y));
+            return Result(result);
         }
 
         public string Day_03_Part2()
         {
             throw new NotImplementedException();
         }
+
+        //private (int x, int y)[] GetPath((int x, int y) start, (int x, int y) end)
+        //{
+        //    var result = new List<(int, int)>();
+        //    if (start.x == end.x)
+        //    {
+        //        for(int i = 0; i < Math.Abs(start.y+end.y); i++)
+        //        {
+
+        //        }
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //    return
+        //}
 
         private (int x, int y) TranslateWirePath(string wirePath, (int x, int y) currentPosition)
         {
@@ -55,6 +73,24 @@ namespace AdventOfCode2019
                 _ => throw new Exception(),
             };
             return result;
+        }
+        private (int x, int y)[] TranslateWireCompletePath(string wirePath, (int x, int y) currentPosition)
+        {
+            if (!int.TryParse(wirePath.Substring(1), out var steps)) throw new Exception();
+            var result = new List<(int, int)>();
+            for (int i = 1; i < steps; i++)
+            {
+                var pos = (wirePath[0]) switch
+                {
+                    'U' => (currentPosition.x, currentPosition.y + i),
+                    'D' => (currentPosition.x, currentPosition.y - i),
+                    'R' => (currentPosition.x + i, currentPosition.y),
+                    'L' => (currentPosition.x - i, currentPosition.y),
+                    _ => throw new Exception(),
+                };
+                result.Add(pos);
+            }
+            return result.ToArray();
         }
     }
 }
