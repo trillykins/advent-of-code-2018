@@ -13,53 +13,29 @@ namespace AdventOfCode2019
             var input = GetAllInput().Split('\n');
             var firstInput = input[0].Split(',');
             var secondInput = input[1].Split(',');
-            if (firstInput.Length != secondInput.Length) throw new Exception();
 
             var first = new List<(int x, int y)>() { (0, 0) };
             var second = new List<(int x, int y)>() { (0, 0) };
 
-            for (int i = 0; i < firstInput.Length; i++)
+            foreach (var f in firstInput)
             {
-                first.AddRange(TranslateWireCompletePath(firstInput[i], first.Last()));
-                second.AddRange(TranslateWireCompletePath(secondInput[i], second.Last()));
+                first.AddRange(TranslateWireCompletePath(f, first.Last()));
             }
 
-            var crossedWires = new List<(int x, int y)>(first.Count());
-            int splat = 0;
-
-            foreach (var (x1, y1) in first)
+            foreach (var s in secondInput)
             {
-                foreach (var (x2, y2) in second)
-                {
-                    if (x1 == x2 && y1 == y2) crossedWires.Add((x1, y1));
-                    splat++;
-                }
+                second.AddRange(TranslateWireCompletePath(s, second.Last()));
             }
-            var result = crossedWires.Where(x => x.x != 0 && x.y != 0).Min(w => Math.Abs(w.x + w.y));
-            return Result(result);
+
+            var diffs = first.Intersect(second).Distinct().Where(pos => pos.x != 0 && pos.y != 0).ToArray();
+            var result = diffs.Select(pos => Math.Abs(pos.x - 0) + Math.Abs(pos.y - 0)).OrderBy(x => x).ToArray();
+            return Result(result.Min());
         }
 
         public string Day_03_Part2()
         {
             throw new NotImplementedException();
         }
-
-        //private (int x, int y)[] GetPath((int x, int y) start, (int x, int y) end)
-        //{
-        //    var result = new List<(int, int)>();
-        //    if (start.x == end.x)
-        //    {
-        //        for(int i = 0; i < Math.Abs(start.y+end.y); i++)
-        //        {
-
-        //        }
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //    return
-        //}
 
         private (int x, int y) TranslateWirePath(string wirePath, (int x, int y) currentPosition)
         {
@@ -74,11 +50,12 @@ namespace AdventOfCode2019
             };
             return result;
         }
+
         private (int x, int y)[] TranslateWireCompletePath(string wirePath, (int x, int y) currentPosition)
         {
             if (!int.TryParse(wirePath.Substring(1), out var steps)) throw new Exception();
             var result = new List<(int, int)>();
-            for (int i = 1; i < steps; i++)
+            for (int i = 1; i <= steps; i++)
             {
                 var pos = (wirePath[0]) switch
                 {
