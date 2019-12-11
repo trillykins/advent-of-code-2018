@@ -26,8 +26,7 @@ namespace AdventOfCode2019
         private string Day_05_Part2()
         {
             var input = GetAllInput().Split(',').Select(x => int.Parse(x)).ToArray();
-            var result = RunInstructions(new int[] { 3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0, 36, 98, 0, 0, 1002, 21, 125, 20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99 }, 5);  // Test case
-            //var result = RunInstructions(input, 5);  // Test case
+            var result = RunInstructions(input, 5);  // Test case
             return Result(result);
         }
 
@@ -75,21 +74,15 @@ namespace AdventOfCode2019
                 {
                     var param2Value = (param2Mode == 0) ? opcodes[param2] : param2;
                     if (opcode == 5 && param1Value != 0) i = param2Value;
-                    if (opcode == 6 && param1Value == 0) i = param2Value;
+                    else if (opcode == 6 && param1Value == 0) i = param2Value;
+                    else i += 3;    // because it does not use param3
                 }
                 else if (opcode == 7 || opcode == 8)
                 {
                     var param2Value = (param2Mode == 0) ? opcodes[param2] : param2;
-                    if (opcode == 7)
-                    {
-                        if (param1Value < param2Value) opcodes[param3] = 1;
-                        else opcodes[param3] = 0;
-                    }
-                    else
-                    {
-                        if (param1Value == param2Value) opcodes[param3] = 1;
-                        else opcodes[param3] = 2;
-                    }
+                    if (opcode == 7) opcodes[param3] = (param1Value < param2Value) ? 1 : 0;
+                    if (opcode == 8) opcodes[param3] = (param1Value == param2Value) ? 1 : 0;
+                    i += 4;
                 }
                 else
                 {
