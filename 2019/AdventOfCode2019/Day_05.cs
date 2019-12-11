@@ -41,7 +41,6 @@ namespace AdventOfCode2019
                 var str = a.ToString();
                 if (a == 1 || a == 2)
                 {
-                    instructionPointer = 4;
                     var b = opcodes[i + 1];   // value 1
                     var c = opcodes[i + 2];   // value 2
                     var d = opcodes[i + 3];   // position
@@ -51,6 +50,7 @@ namespace AdventOfCode2019
                         2 => opcodes[b] * opcodes[c],
                         _ => throw new Exception("Invalid opcode!"),
                     };
+                    instructionPointer = 4;
                 }
                 else if (a == 3)
                 {
@@ -65,7 +65,13 @@ namespace AdventOfCode2019
                 else if (str.Length > 1)
                 {
                     // e.g. 1101
-                    Console.WriteLine();
+                    if (str.Length == 2) throw new ArgumentOutOfRangeException($"{str} doesn't really make sense, does it?");
+                    str = a.ToString("00000");
+                    // do stuff
+                }
+                else
+                {
+                    throw new NotSupportedException();
                 }
                 if (instructionPointer != 4 && instructionPointer != 2) throw new Exception("Bad instruction!");
                 i += instructionPointer;
