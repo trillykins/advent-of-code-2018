@@ -12,6 +12,7 @@ namespace AdventOfCode2019
             new Day_03();
             new Day_04();
             new Day_05();
+            new Day_06();
         }
     }
 }
