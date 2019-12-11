@@ -39,13 +39,12 @@ namespace AdventOfCode2019
             {
                 var opcode = opcodes[i + 0] % 10;
 
-                var a = opcodes[i + 0];   // opcode
                 var param1 = opcodes[i + 1];
                 var param2 = opcodes[i + 2];
                 var param3 = opcodes[i + 3];
 
-                int param1Mode = (a / 100) % 10;
-                int param2Mode = (a / 1000) % 10;
+                int param1Mode = (opcodes[i] / 100) % 10;
+                int param2Mode = (opcodes[i] / 1000) % 10;
 
                 var param1Value = (param1Mode == 0) ? opcodes[param1] : param1;
 
@@ -90,13 +89,6 @@ namespace AdventOfCode2019
                 }
             }
             return output.Last();
-        }
-
-        private int PositionOrImmediate(int[] opcodes, int value, int decider)
-        {
-            if (decider == 0) return opcodes[value];    // Position
-            if (decider == 1) return value;             // Immediate
-            throw new NotSupportedException();
         }
     }
 }
