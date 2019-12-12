@@ -1,25 +1,21 @@
---- Day 4: Secure Container ---
-You arrive at the Venus fuel depot only to discover it's protected by a password. The Elves had written the password on a sticky note, but someone threw it out.
+--- Day 8: Space Image Format ---
+The Elves' spirits are lifted when they realize you have an opportunity to reboot one of their Mars rovers, and so they are curious if you would spend a brief sojourn on Mars. You land your ship near the rover.
 
-However, they do remember a few key facts about the password:
+When you reach the rover, you discover that it's already in the process of rebooting! It's just waiting for someone to enter a BIOS password. The Elf responsible for the rover takes a picture of the password (your puzzle input) and sends it to you via the Digital Sending Network.
 
-It is a six-digit number.
-The value is within the range given in your puzzle input.
-Two adjacent digits are the same (like 22 in 122345).
-Going from left to right, the digits never decrease; they only ever increase or stay the same (like 111123 or 135679).
-Other than the range rule, the following are true:
+Unfortunately, images sent via the Digital Sending Network aren't encoded with any normal encoding; instead, they're encoded in a special Space Image Format. None of the Elves seem to remember why this is the case. They send you the instructions to decode it.
 
-111111 meets these criteria (double 11, never decreases).
-223450 does not meet these criteria (decreasing pair of digits 50).
-123789 does not meet these criteria (no double).
-How many different passwords within the range given in your puzzle input meet these criteria?
+Images are sent as a series of digits that each represent the color of a single pixel. The digits fill each row of the image left-to-right, then move downward to the next row, filling rows top-to-bottom until every pixel of the image is filled.
 
---- Part Two ---
-An Elf just remembered one more important detail: the two adjacent matching digits are not part of a larger group of matching digits.
+Each image actually consists of a series of identically-sized layers that are filled in this way. So, the first digit corresponds to the top-left pixel of the first layer, the second digit corresponds to the pixel to the right of that on the same layer, and so on until the last digit, which corresponds to the bottom-right pixel of the last layer.
 
-Given this additional criterion, but still ignoring the range rule, the following are now true:
+For example, given an image 3 pixels wide and 2 pixels tall, the image data 123456789012 corresponds to the following image layers:
 
-112233 meets these criteria because the digits never decrease and all repeated digits are exactly two digits long.
-123444 no longer meets the criteria (the repeated 44 is part of a larger group of 444).
-111122 meets the criteria (even though 1 is repeated more than twice, it still contains a double 22).
-How many different passwords within the range given in your puzzle input meet all of the criteria?
+Layer 1: 123
+         456
+
+Layer 2: 789
+         012
+The image you received is 25 pixels wide and 6 pixels tall.
+
+To make sure the image wasn't corrupted during transmission, the Elves would like you to find the layer that contains the fewest 0 digits. On that layer, what is the number of 1 digits multiplied by the number of 2 digits?
